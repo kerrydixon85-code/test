@@ -29,13 +29,19 @@ export interface Flight {
   date: string;
 }
 
+export type SearchMode = 'specific' | 'range';
+export type SortOption = 'miles' | 'date';
+
 export interface SearchFilters {
   origin: string;
   destination: string;
+  searchMode: SearchMode;
   departureDate: Date | null;
   returnDate: Date | null;
+  endDate: Date | null; // For 6-month range search
   cabinClass: CabinClass[];
   maxStops: number;
   airlines: string[];
-  flexibleDates: boolean;
+  isRoundTrip: boolean;
+  sortBy: SortOption;
 }

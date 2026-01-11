@@ -68,17 +68,19 @@ function generateFlightTime(distance: number, isReturn: boolean = false): { depa
   };
 }
 
-export function generateFlights(count: number = 500): Flight[] {
+export function generateFlights(count: number = 2000): Flight[] {
   const flights: Flight[] = [];
   const today = new Date();
 
+  // Generate flights for each UK airport to popular destinations
+  // This ensures good coverage for testing
   for (let i = 0; i < count; i++) {
     const origin = randomElement(UK_AIRPORTS);
     const destination = randomElement(INTERNATIONAL_AIRPORTS);
     const airline = randomElement(AIRLINES);
     const cabinClass = randomElement(CABIN_CLASSES);
     const stops = randomElement([0, 0, 0, 1, 1, 2]); // More non-stop flights
-    const daysFromNow = randomInt(0, 90);
+    const daysFromNow = randomInt(0, 180); // 6 months
     const date = format(addDays(today, daysFromNow), 'yyyy-MM-dd');
 
     const distance = calculateDistance(origin.code, destination.code);
@@ -107,4 +109,4 @@ export function generateFlights(count: number = 500): Flight[] {
   return flights;
 }
 
-export const FLIGHTS = generateFlights(500);
+export const FLIGHTS = generateFlights(2000);
